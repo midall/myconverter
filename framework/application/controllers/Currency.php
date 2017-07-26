@@ -6,11 +6,12 @@ class Currency extends CI_Controller
 {
 	function __construct()
 	{ 
-         parent::__construct();
-		 
-		 // Helpers
-		 $this->load->helper( 'url' );
-		 $this->load->helper( 'form' );
+        parent::__construct();
+		
+		
+		// Helpers
+		$this->load->helper( 'url' );
+		$this->load->helper( 'form' );
     } 
 	
 
@@ -28,32 +29,32 @@ class Currency extends CI_Controller
 	
 	public function calculate()
 	{
-		
+		echo 'convert';
 	}
 	
 	private function get_currencies()
 	{
 		$cur = array(
-			'ALL' => 'Albania Lek',
-            'AFN' => 'Afghanistan Afghani',
-            'ARS' => 'Argentina Peso',
-            'AWG' => 'Aruba Guilder',
-            'AUD' => 'Australia Dollar',
-            'AZN' => 'Azerbaijan New Manat',
-            'BSD' => 'Bahamas Dollar',
-            'BBD' => 'Barbados Dollar',
-            'BDT' => 'Bangladeshi taka',
-            'BYR' => 'Belarus Ruble',
-            'BZD' => 'Belize Dollar',
-            'BMD' => 'Bermuda Dollar',
-            'BOB' => 'Bolivia Boliviano',
-            'BAM' => 'Bosnia and Herzegovina Convertible Marka',
-            'BWP' => 'Botswana Pula',
-            'BGN' => 'Bulgaria Lev',
+			'AUD' => 'Australia Dollar',
             'BRL' => 'Brazil Real',
-            'BND' => 'Brunei Darussalam Dollar',
-            'KHR' => 'Cambodia Riel',
-            'CAD' => 'Canada Dollar'
+            'CAD' => 'Canada Dollar',
+            'CUP' => 'Cuba Peso',
+            'CZK' => 'Czech Republic Koruna',
+            'EUR' => 'Euro Member Countries',
+            'FKP' => 'Falkland Islands (Malvinas) Pound',
+            'HKD' => 'Hong Kong Dollar',
+            'JPY' => 'Japan Yen',
+            'KRW' => 'Korea (South) Won',
+            'NZD' => 'New Zealand Dollar',
+            'PLN' => 'Poland Zloty',
+            'RUB' => 'Russia Ruble',
+            'SEK' => 'Sweden Krona',
+            'CHF' => 'Switzerland Franc',
+            'TWD' => 'Taiwan New Dollar',
+            'THB' => 'Thailand Baht',
+            'TRL' => 'Turkey Lira',
+            'GBP' => 'United Kingdom Pound',
+            'USD' => 'United States Dollar'
 		);
 		
 		return $cur;
