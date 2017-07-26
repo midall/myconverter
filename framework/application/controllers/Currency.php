@@ -8,6 +8,8 @@ class Currency extends CI_Controller
 	{ 
         parent::__construct();
 		
+		// Models
+		$this->load->model( 'currency_model' );
 		
 		// Helpers
 		$this->load->helper( 'url' );
@@ -29,7 +31,22 @@ class Currency extends CI_Controller
 	
 	public function calculate()
 	{
-		echo 'convert';
+		//var_dump( $this->input->get()  );
+		
+		$cur_from = $this->input->get( 'cur_from' );
+		$cur_to = $this->input->get( 'cur_to' );
+		$cur_value = $this->input->get( 'cur_value' );
+		
+		$from = $this->currency_model->get_currency( $cur_from );
+		$to = $this->currency_model->get_currency( $cur_to );
+		//var_dump( $from, $to );
+		
+		$rate = $this->currency_model->convert_currency( $from['cur_id'], $to['cur_id'] );
+		
+		//var_dump( $rate );
+		
+		$cur_convert = $rate['cur_rate'] * $cur_value;
+		echo $cur_convert;
 	}
 	
 	private function get_currencies()
