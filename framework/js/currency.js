@@ -27,13 +27,15 @@ function submit_form()
     var cur_value_val = $("#cur_value").val();
     var cur_from_val = $("#cur_from").val();
     var cur_to_val = $("#cur_to").val();
+    var csrf_val = $('input[name="csrf_token"]').val();
     
     $.ajax({
        url: base_url + "currency/calculate",
-       data: { cur_value: cur_value_val, cur_from: cur_from_val, cur_to: cur_to_val },
+       data: { cur_value: cur_value_val, cur_from: cur_from_val, cur_to: cur_to_val, csrf: csrf_val },
        error: function() {
           $( "#result").html( "An error has occurred");
-       },
+       }, 
+       cache: false, 
        success: function( data ) {
             $( "#result" ).html( data );
        },

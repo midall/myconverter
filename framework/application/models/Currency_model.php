@@ -7,6 +7,13 @@ class Currency_model extends CI_Model {
 		$this->load->database();
 	}
 	
+	public function get_currencies( )
+	{
+		 $query = $this->db->get( 'currency' );
+		 
+		 return $query->result_array();
+	}
+	
 	public function get_currency( $cur_code )
 	{
 		 $data = array( 'cur_code' => $cur_code );
@@ -19,7 +26,6 @@ class Currency_model extends CI_Model {
 	{
 		$limit = 5;
 		$offset = 0;
-		//$query = $this->db->get_where( 'currency_rates_history', array(), $limit, $offset );
 		 
 		$this->db->select( 'curfrom.cur_name AS cur_from_name, curto.cur_name AS cur_to_name, his.cur_value, his.cur_convert');
 		$this->db->from( 'currency_rates_history AS his' );
@@ -29,7 +35,7 @@ class Currency_model extends CI_Model {
 		$this->db->limit( $limit, $offset );
 		
 		$query = $this->db->get();
-		//echo $this->db->last_query();
+		
 		return $query->result_array();
 	}
 	
@@ -37,7 +43,7 @@ class Currency_model extends CI_Model {
 	{
 		$data = array( 'cur_from' => $cur_from, 'cur_to' => $cur_to );
 		$query = $this->db->get_where( 'currency_rates', $data );
-		//echo $this->db->last_query();
+		
 		return $query->row_array();
 	}
 	
@@ -45,8 +51,8 @@ class Currency_model extends CI_Model {
 	{
 		$data = array( 'cur_from' => $cur_from, 'cur_to' => $cur_to, 
 						'cur_value' => $cur_value, 'cur_convert' => $cur_convert );
+		
 		$this->db->insert( 'currency_rates_history', $data );
-		//echo $this->db->last_query();
 	}
 	
 }
