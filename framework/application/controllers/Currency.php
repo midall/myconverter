@@ -25,7 +25,8 @@ class Currency extends CI_Controller
 	public function view_form()
 	{
 		$data['cur_options'] = $this->get_currencies();
-		
+		$data['cur_history'] = $this->currency_model->get_currency_history();
+		//var_dump($data['cur_history']);
 		$this->load->view( 'currencies', $data );
 	}
 	
@@ -43,9 +44,15 @@ class Currency extends CI_Controller
 		
 		$rate = $this->currency_model->convert_currency( $from['cur_id'], $to['cur_id'] );
 		
+		
 		//var_dump( $rate );
 		
 		$cur_convert = $rate['cur_rate'] * $cur_value;
+		
+		
+		// Log the transaction
+		$this->currency_model->save_currency( $from['cur_id'], $to['cur_id'], $cur_value, $cur_convert );
+		
 		echo $cur_convert;
 	}
 	

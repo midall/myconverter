@@ -17,7 +17,17 @@
 
 	<div id="body">
 		
+		<p>The five last conversions are:</p>
 		<?php
+		
+		foreach( $cur_history as $entry )
+		{
+			echo '<code>';
+			echo number_format( $entry['cur_value'], 3 );
+			echo ' ' . $entry['cur_from_name'] . '=>' . $entry['cur_to_name'] . ' ';
+			echo number_format( $entry['cur_convert'], 3 );
+			echo '</code>';
+		}
 		
 		echo form_open( '', 'class="form_cinverter" id="form_cinverter"' );
 		
