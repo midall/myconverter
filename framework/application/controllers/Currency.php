@@ -32,14 +32,17 @@ class Currency extends CI_Controller
 	
 	public function calculate()
 	{
-		$cur_from = $this->input->get( 'cur_from' );
-		$cur_to = $this->input->get( 'cur_to' );
-		$cur_value = $this->input->get( 'cur_value' );
-		$csrf_value = $this->input->get( 'csrf' );
+		$get_data = $this->xss_clean_data( $this->input->get() );
+		
+		$cur_from = $get_data['cur_from'];
+		$cur_to = $get_data['cur_to'];
+		$cur_value = $get_data['cur_value'];
+		$csrf_value = $get_data['csrf'];
 		
 		if( $csrf_value != $this->security->get_csrf_hash() )
 		{
-			redirect( '/' );
+			echo 'Authentication Error';
+			exit();
 		}
 		
 		$from = $this->currency_model->get_currency( $cur_from );
@@ -66,5 +69,12 @@ class Currency extends CI_Controller
 		}
 		
 		return $currencies;
+	}
+	
+	private function xss_clean_data( $data )
+	{
+		$clean_data = $this->security->xss_clean( $data );
+		
+		return $clean_data;
 	}
 }
